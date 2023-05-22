@@ -1,0 +1,58 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+directive @upper on FIELD_DEFINITION
+
+type ItemEntity implements Product {
+  name: String!
+  description: String!
+  price: Float!
+  _id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+  availability: Availability!
+}
+
+interface Product {
+  name: String!
+  description: String!
+  price: Float!
+}
+
+enum Availability {
+  WORN_OUT
+  IN_STOCK
+  SOLD
+}
+
+"""Date custom scalar type"""
+scalar Date
+
+type Query {
+  listItems: [ItemEntity!]!
+  itemGetById(id: String!): ItemEntity!
+}
+
+type Mutation {
+  createItem(input: CreateItemInput!): ItemEntity!
+  deleteItem(id: String!): String!
+  updateItem(input: UpdateItemInput!): ItemEntity!
+}
+
+input CreateItemInput {
+  name: String!
+  description: String!
+  price: Float!
+}
+
+input UpdateItemInput {
+  _id: ID!
+  name: String!
+  description: String!
+  price: Float!
+}
+
+type Subscription {
+  promotionItem: String!
+}
